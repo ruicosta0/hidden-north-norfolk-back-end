@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: sharrington
+
+  datasource:
+    url: jdbc:postgresql://db.uirozcolrawesixxsmju.supabase.co:5432/postgres
+    username: postgres
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+    hikari: # tool that manages connection to database
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 12000000
+      validation-timeout: 5000
+      pool-name: SpringBootHikariCP
+      data-source-properties:
+        prepareThreshold: 5
+        preparedStatementCacheQueries: 256
+        preparedStatementCacheSizedMiB: 5
+
+        tcpKeepAlive: true
+        socketTimeout: 30
+        connectTimeout: 10
+
+  jpa:
+     properties:
+       hibernate:
+         dialect: org.hibernate.dialect.PostgreSQLDialect
+         format_sql: true
+         show_sql: true
+
+  spring:
+   jpa:
+     show-sql: true
+     properties:
+       hibernate:
+         format_sql: true
+         use_sql_comments: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+nginx:
+  trusted-ips:
+    - "127.0.0.1" # nginx on same machine
+    - "::1" # IPv6 localhost
+    - "172.17.0.0/16" # nginx container IP when using Docker
+    - "10.0.0.5/32" # nginx server IP (if separate machine)
+
+supabase:
+  url: "https://uirozcolrawesixxsmju.supabase.co"
+  service-key: ${SUPABASE_SERVICE_KEY}
+  bucket: images
+
+logging:
+  level:
+    org.springframework.web.client: INFO
+    org.springframework.http.client: INFO
+    org.springframework.web: INFO
