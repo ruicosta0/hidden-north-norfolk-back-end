@@ -5,3 +5,6 @@ spring:
 
 nginx:
   require-proxy: true
+
+server:
+  port: 8081
