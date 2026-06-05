@@ -6,6 +6,7 @@ import com.riprojects.sharrington.api.mappers.toPointOfInterestDto
 import com.riprojects.sharrington.api.mappers.toPointOfInterestImageDto
 import com.riprojects.sharrington.dto.LandmarkDto
 import com.riprojects.sharrington.dto.LandmarkImageDto
+import com.riprojects.sharrington.dto.LandmarkImageUrlDto
 import com.riprojects.sharrington.dto.PointOfInterestDto
 import com.riprojects.sharrington.dto.PointOfInterestImageDto
 import com.riprojects.sharrington.dto.RecordLandmarkRequest
@@ -153,10 +154,16 @@ class AdminController(
     @GetMapping("/landmarks/{landmarkImageId}/images")
     fun getLandmarkImagePublicUrl(
         @PathVariable ("landmarkImageId") landmarkImageId: UUID
-    ) {
+    ): LandmarkImageUrlDto {
         val imagePath = adminService.getLandmarkImagePath(landmarkImageId)
-        val publicUrl = storageService.getPublicUrl(imagePath)
-        println(publicUrl)
+
+        return LandmarkImageUrlDto(
+            url = storageService.getPublicUrl(imagePath)
+        )
+
+//
+//        val publicUrl = storageService.getPublicUrl(imagePath)
+//        println(publicUrl)
     }
 
     // deletes landmark image & image in Supabase bucket, NOT landmark
