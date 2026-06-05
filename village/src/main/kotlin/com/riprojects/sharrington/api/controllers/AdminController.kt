@@ -7,6 +7,7 @@ import com.riprojects.sharrington.api.mappers.toPointOfInterestImageDto
 import com.riprojects.sharrington.dto.LandmarkDto
 import com.riprojects.sharrington.dto.LandmarkImageDto
 import com.riprojects.sharrington.dto.LandmarkImageUrlDto
+import com.riprojects.sharrington.dto.PoiImageUrlDto
 import com.riprojects.sharrington.dto.PointOfInterestDto
 import com.riprojects.sharrington.dto.PointOfInterestImageDto
 import com.riprojects.sharrington.dto.RecordLandmarkRequest
@@ -202,10 +203,15 @@ class AdminController(
     @GetMapping("/landmarks/poi/{poiImageId}/images")
     fun getPoiImagePublicUrl(
         @PathVariable ("poiImageId") poiImageId: UUID
-    ) {
+    ): PoiImageUrlDto {
         val imagePath = adminService.getPoiImagePath(poiImageId)
-        val publicUrl = storageService.getPublicUrl(imagePath)
-        println(publicUrl)
+
+        return PoiImageUrlDto(
+            url = storageService.getPublicUrl(imagePath)
+        )
+
+//        val publicUrl = storageService.getPublicUrl(imagePath)
+//        println(publicUrl)
     }
 
     // deletes poi image & image in Supabase bucket, NOT main POI row in table
