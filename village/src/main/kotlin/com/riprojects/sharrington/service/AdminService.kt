@@ -25,6 +25,7 @@ import com.riprojects.sharrington.infra.storage.SupabaseStorageService
 import jakarta.transaction.Transactional
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import java.time.Instant
 import java.util.UUID
 
 //how to prevent duplication of landmarks with multiple upload attempts????
@@ -167,17 +168,37 @@ class AdminService(
         return savedLandmarkImage.toLandmarkImage()
     }
 
-    fun getLandmarkImagePath(id: UUID): String {
-        val landmarkImageId = landmarkImageRepository.findByIdOrNull(id)
-        ?: throw LandmarkNotFoundException("Landmark with $id not found")
+    fun getImagesForLandmark(
+        landmarkId: UUID
+    ): List<LandmarkImage> {
 
+        return landmarkImageRepository
+            .findAllByLandmark_Id(landmarkId)
+            .map { image ->
 
-        println("admin service landmark image id path: ${landmarkImageId.image_path}")
-
-
-        //return landmarkImageId.image_path
-        return landmarkImageId.image_path
+                LandmarkImage(
+                    id = image.id!!,
+                    image_path = storageService.getPublicUrl(
+                        image.image_path
+                    ),
+                    caption = image.caption,
+                    landmarkId = image.landmark.id!!,
+                    updatedAt = image.updatedAt ?: Instant.now()
+                )
+            }
     }
+
+//    fun getLandmarkImagePath(id: UUID): String {
+//        val landmarkImageId = landmarkImageRepository.findByIdOrNull(id)
+//        ?: throw LandmarkNotFoundException("Landmark with $id not found")
+//
+//
+//        println("admin service landmark image id path: ${landmarkImageId.image_path}")
+//
+//
+//        //return landmarkImageId.image_path
+//        return landmarkImageId.image_path
+//    }
 
 
     @Transactional

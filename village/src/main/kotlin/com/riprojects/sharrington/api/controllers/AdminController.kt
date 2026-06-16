@@ -152,32 +152,38 @@ class AdminController(
         return adminService.attachImageToLandmark(landmarkId, imagePath, caption).toLandmarkImageDto()
     }
 
-    @GetMapping("/landmarks/{landmarkImageId}/images")
-    fun getLandmarkImagePublicUrl(
-        @PathVariable ("landmarkImageId") landmarkImageId: UUID
-    ): LandmarkImageUrlDto {
-        val imagePath = adminService.getLandmarkImagePath(landmarkImageId)
+    @GetMapping("/landmarks/{landmarkId}/images")
+    fun getLandmarkImages(
+        @PathVariable landmarkId: UUID
+    ): List<LandmarkImageDto> {
 
-        return LandmarkImageUrlDto(
-            url = storageService.getPublicUrl(imagePath)
-        )
-
-//
-//        val publicUrl = storageService.getPublicUrl(imagePath)
-//        println(publicUrl)
+        return adminService
+            .getImagesForLandmark(landmarkId)
+            .map { it.toLandmarkImageDto() }
     }
+
+//    @GetMapping("/landmarks/{landmarkImageId}/images")
+//    fun getLandmarkImagePublicUrl(
+//        @PathVariable ("landmarkImageId") landmarkImageId: UUID
+//    ): LandmarkImageUrlDto {
+//        val imagePath = adminService.getLandmarkImagePath(landmarkImageId)
+//
+//        return LandmarkImageUrlDto(
+//            url = storageService.getPublicUrl(imagePath)
+//        )
+//    }
 
     // deletes landmark image & image in Supabase bucket, NOT landmark
-    @DeleteMapping("/landmarks/{landmarkImageId}/images")
-    fun deleteLandmarkImage(
-        @PathVariable("landmarkImageId") landmarkImageId: UUID
-    ) {
-        val imagePath = adminService.getLandmarkImagePath(landmarkImageId)
-        val publicUrl = storageService.getPublicUrl(imagePath)
-        println("public url $publicUrl")
-        storageService.deleteFile(publicUrl)
-        adminService.deleteLandmarkImage(landmarkImageId)
-    }
+//    @DeleteMapping("/landmarks/{landmarkImageId}/images")
+//    fun deleteLandmarkImage(
+//        @PathVariable("landmarkImageId") landmarkImageId: UUID
+//    ) {
+//        val imagePath = adminService.getLandmarkImagePath(landmarkImageId)
+//        val publicUrl = storageService.getPublicUrl(imagePath)
+//        println("public url $publicUrl")
+//        storageService.deleteFile(publicUrl)
+//        adminService.deleteLandmarkImage(landmarkImageId)
+//    }
 
 
 
