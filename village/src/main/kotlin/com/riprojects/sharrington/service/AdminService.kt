@@ -178,7 +178,7 @@ class AdminService(
 
                 LandmarkImage(
                     id = image.id!!,
-                    image_path = storageService.getPublicUrl(
+                    imageUrl = storageService.getPublicUrl(
                         image.image_path
                     ),
                     caption = image.caption,
