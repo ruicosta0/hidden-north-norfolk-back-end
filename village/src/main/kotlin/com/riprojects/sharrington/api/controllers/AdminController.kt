@@ -161,19 +161,8 @@ class AdminController(
             .map { it.toLandmarkImageDto() }
     }
 
-//    @GetMapping("/landmarks/{landmarkImageId}/images")
-//    fun getLandmarkImagePublicUrl(
-//        @PathVariable ("landmarkImageId") landmarkImageId: UUID
-//    ): LandmarkImageUrlDto {
-//        val imagePath = adminService.getLandmarkImagePath(landmarkImageId)
-//
-//        return LandmarkImageUrlDto(
-//            url = storageService.getPublicUrl(imagePath)
-//        )
-//    }
-
     // deletes landmark image & image in Supabase bucket, NOT landmark
-    @DeleteMapping("/landmarks/{landmarkImageId}/images")
+    @DeleteMapping("/landmark-images/{landmarkImageId}")
     fun deleteLandmarkImage(
         @PathVariable("landmarkImageId") landmarkImageId: UUID
     ) {
@@ -183,10 +172,6 @@ class AdminController(
         storageService.deleteFile(publicUrl)
         adminService.deleteLandmarkImage(landmarkImageId)
     }
-
-
-
-
 
     /*
         Point Of Interest Image
