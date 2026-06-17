@@ -35,7 +35,7 @@ fun PointOfInterestEntity.toPointOfInterest(): PointOfInterest {
 fun LandmarkImageEntity.toLandmarkImage(): LandmarkImage {
     return LandmarkImage(
         id = id!!,
-        image_path = image_path,
+        imageUrl = image_path,
         caption = caption,
         landmarkId = landmark.id!!,
         updatedAt = updatedAt!!

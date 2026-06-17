@@ -38,7 +38,7 @@ fun PointOfInterest.toPointOfInterestDto(): PointOfInterestDto {
 fun LandmarkImage.toLandmarkImageDto(): LandmarkImageDto {
     return LandmarkImageDto(
         id = id.toString(),
-        image_path = image_path,
+        imageUrl = imageUrl,
         caption = caption,
         landmark = landmarkId.toString(),
         updatedAt = updatedAt

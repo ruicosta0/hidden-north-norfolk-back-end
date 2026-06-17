@@ -6,7 +6,6 @@ import com.riprojects.sharrington.api.mappers.toPointOfInterestDto
 import com.riprojects.sharrington.api.mappers.toPointOfInterestImageDto
 import com.riprojects.sharrington.dto.LandmarkDto
 import com.riprojects.sharrington.dto.LandmarkImageDto
-import com.riprojects.sharrington.dto.LandmarkImageUrlDto
 import com.riprojects.sharrington.dto.PoiImageUrlDto
 import com.riprojects.sharrington.dto.PointOfInterestDto
 import com.riprojects.sharrington.dto.PointOfInterestImageDto

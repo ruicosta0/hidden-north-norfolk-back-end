@@ -7,7 +7,7 @@ typealias LandmarkImageId = UUID
 
 data class LandmarkImage(
     var id: LandmarkImageId,
-    var image_path: String,
+    var imageUrl: String,
     var caption: String?,
     var landmarkId: LandmarkId,
     val updatedAt: Instant
