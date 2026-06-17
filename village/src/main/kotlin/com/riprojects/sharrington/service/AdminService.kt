@@ -188,24 +188,23 @@ class AdminService(
             }
     }
 
-//    fun getLandmarkImagePath(id: UUID): String {
-//        val landmarkImageId = landmarkImageRepository.findByIdOrNull(id)
-//        ?: throw LandmarkNotFoundException("Landmark with $id not found")
-//
-//
-//        println("admin service landmark image id path: ${landmarkImageId.image_path}")
-//
-//
-//        //return landmarkImageId.image_path
-//        return landmarkImageId.image_path
-//    }
-
-
     @Transactional
-    fun deleteLandmarkImage(id: UUID) {
-        println("admin service deleteLandmarkImage $id")
-        landmarkImageRepository.deleteById(id)
+    fun deleteLandmarkImage(landmarkImageId: UUID) {
+        println("admin service deleteLandmarkImage $landmarkImageId")
+        landmarkImageRepository.deleteById(landmarkImageId)
     }
+
+    fun getLandmarkImagePath(id: UUID): String {
+        val landmarkImageId = landmarkImageRepository.findByIdOrNull(id)
+        ?: throw LandmarkNotFoundException("Landmark with $id not found")
+
+        println("admin service landmark image id path: ${landmarkImageId.image_path}")
+
+        //return landmarkImageId.image_path
+        println("print image_path ${landmarkImageId.image_path}")
+        return landmarkImageId.image_path
+    }
+
 
     /*
       Point Of Interest Image

@@ -173,16 +173,16 @@ class AdminController(
 //    }
 
     // deletes landmark image & image in Supabase bucket, NOT landmark
-//    @DeleteMapping("/landmarks/{landmarkImageId}/images")
-//    fun deleteLandmarkImage(
-//        @PathVariable("landmarkImageId") landmarkImageId: UUID
-//    ) {
-//        val imagePath = adminService.getLandmarkImagePath(landmarkImageId)
-//        val publicUrl = storageService.getPublicUrl(imagePath)
-//        println("public url $publicUrl")
-//        storageService.deleteFile(publicUrl)
-//        adminService.deleteLandmarkImage(landmarkImageId)
-//    }
+    @DeleteMapping("/landmarks/{landmarkImageId}/images")
+    fun deleteLandmarkImage(
+        @PathVariable("landmarkImageId") landmarkImageId: UUID
+    ) {
+        val imagePath = adminService.getLandmarkImagePath(landmarkImageId)
+        val publicUrl = storageService.getPublicUrl(imagePath)
+        println("public url $publicUrl")
+        storageService.deleteFile(publicUrl)
+        adminService.deleteLandmarkImage(landmarkImageId)
+    }
 
 
 
