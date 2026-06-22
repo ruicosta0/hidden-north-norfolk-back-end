@@ -84,8 +84,6 @@ class AdminController(
       Point Of Interest
      */
 
-
-
     @PostMapping("/landmarks/recordPoi/{landmarkId}")
     fun recordPoi(
         @PathVariable("landmarkId") landmarkId: UUID,
@@ -131,11 +129,9 @@ class AdminController(
 
 
 
-
     /*
         LandmarkImage
      */
-
 
 
     @PostMapping("/landmarks/{landmarkId}/images")

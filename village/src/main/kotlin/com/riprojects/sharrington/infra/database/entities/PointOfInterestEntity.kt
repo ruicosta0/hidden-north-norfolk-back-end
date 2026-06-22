@@ -36,7 +36,7 @@ class PointOfInterestEntity(
     val landmark: LandmarkEntity,
     @Column(nullable = false,unique = false)
     var name: String,
-    @Column(nullable = false,unique = false)
+    @Column(nullable = false,unique = false, columnDefinition = "Text")
     var description: String,
     @Column(nullable = false)
     var latitude: Double,
