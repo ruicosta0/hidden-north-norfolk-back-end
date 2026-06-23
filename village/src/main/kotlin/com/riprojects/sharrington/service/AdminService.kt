@@ -4,7 +4,6 @@ import com.riprojects.sharrington.domain.exception.LandmarkNotFoundException
 import com.riprojects.sharrington.domain.exception.PointOfInterestNotFoundException
 import com.riprojects.sharrington.domain.model.Landmark
 import com.riprojects.sharrington.domain.model.LandmarkImage
-import com.riprojects.sharrington.domain.model.PoiImageId
 import com.riprojects.sharrington.domain.model.PointOfInterest
 import com.riprojects.sharrington.domain.model.PointOfInterestImage
 import com.riprojects.sharrington.dto.UpdateLandmarkRequest
@@ -116,11 +115,11 @@ class AdminService(
         return savedPointOfInterest
     }
 
-    fun getPoiById(
+    fun getPoiByLandmarkId(
         id: UUID
     ): PointOfInterest {
         val pointOfInterest =
-            pointOfInterestRepository.findByIdOrNull(id)
+            pointOfInterestRepository.findByLandmark_Id(id)
                 ?: throw PointOfInterestNotFoundException("Poi with $id not found")
 
         return pointOfInterest.toPointOfInterest()

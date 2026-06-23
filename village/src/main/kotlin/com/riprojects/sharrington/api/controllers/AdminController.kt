@@ -100,11 +100,11 @@ class AdminController(
         ).toPointOfInterestDto()
     }
 
-    @GetMapping("/landmarks/poi/{poiId}")
+    @GetMapping("/landmarks/poi/{landmarkId}")
     fun getPointOfInterest(
-        @PathVariable("poiId") poiId: UUID
+        @PathVariable("landmarkId") landmarkId: UUID
     ): PointOfInterestDto {
-        return adminService.getPoiById(poiId).toPointOfInterestDto()
+        return adminService.getPoiByLandmarkId(landmarkId).toPointOfInterestDto()
     }
 
     @GetMapping("/landmarks/poi/")
