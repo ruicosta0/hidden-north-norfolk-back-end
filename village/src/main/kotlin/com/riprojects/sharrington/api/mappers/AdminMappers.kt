@@ -26,7 +26,7 @@ fun Landmark.toLandmarkDto(): LandmarkDto {
 fun PointOfInterest.toPointOfInterestDto(): PointOfInterestDto {
     return PointOfInterestDto(
         id = id.toString(),
-        landmark = landmarkId.toString(),
+        landmarkId = landmarkId.toString(),
         name = name,
         description = description,
         latitude = latitude,
