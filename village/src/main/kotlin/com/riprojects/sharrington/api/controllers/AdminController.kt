@@ -94,7 +94,7 @@ class AdminController(
         return adminService.recordPoi(
             id = landmarkId,
             name = body.name,
-            description = body.description
+            description = body.description,
         ).toPointOfInterestDto()
     }
 

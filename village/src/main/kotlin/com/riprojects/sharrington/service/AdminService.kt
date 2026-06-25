@@ -96,7 +96,7 @@ class AdminService(
 
 
     @Transactional
-    fun recordPoi(id: UUID, name: String, description: String, latitude: Double, longitude: Double): PointOfInterest {
+    fun recordPoi(id: UUID, name: String, description: String): PointOfInterest {
         val landmark = landmarkRepository.findByIdOrNull(id)?: throw LandmarkNotFoundException("Landmark with $id not found")
 
         val trimmedName = name.trim()
@@ -107,8 +107,6 @@ class AdminService(
                 landmark = landmark,
                 name = trimmedName,
                 description = trimmedDescription,
-                latitude = latitude,
-                longitude = longitude
             )
         ).toPointOfInterest()
 
@@ -144,8 +142,6 @@ class AdminService(
 
         body.name?.let {pointOfInterest.name =  it}
         body.description?.let {pointOfInterest.description =  it}
-        body.latitude?.let {pointOfInterest.latitude =  it}
-        body.longitude?.let {pointOfInterest.longitude =  it}
 
         return pointOfInterest.toPointOfInterest()
     }
