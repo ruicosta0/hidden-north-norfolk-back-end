@@ -39,9 +39,6 @@ class PointOfInterestEntity(
     @Column(nullable = false,unique = false, columnDefinition = "Text")
     var description: String,
     @Column(nullable = false)
-    var latitude: Double,
-    @Column(nullable = false)
-    var longitude: Double,
 
     @OneToMany(mappedBy = "poi",cascade =[CascadeType.ALL], orphanRemoval = true)
     val images: MutableList<PointOfInterestImageEntity> = mutableListOf(),

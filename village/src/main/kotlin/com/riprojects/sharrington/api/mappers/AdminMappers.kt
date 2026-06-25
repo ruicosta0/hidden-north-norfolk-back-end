@@ -29,8 +29,6 @@ fun PointOfInterest.toPointOfInterestDto(): PointOfInterestDto {
         landmarkId = landmarkId.toString(),
         name = name,
         description = description,
-        latitude = latitude,
-        longitude = longitude,
         updatedAt = updatedAt
     )
 }

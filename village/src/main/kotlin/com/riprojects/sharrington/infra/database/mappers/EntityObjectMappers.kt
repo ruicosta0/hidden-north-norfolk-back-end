@@ -26,8 +26,6 @@ fun PointOfInterestEntity.toPointOfInterest(): PointOfInterest {
         landmarkId = landmark.id!!,
         name =  name,
         description = description,
-        latitude = latitude,
-        longitude = longitude,
         updatedAt = updatedAt!!
     )
 }

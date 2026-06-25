@@ -7,7 +7,5 @@ data class PointOfInterestDto(
     val landmarkId: String, // ??join column
     val name: String,
     val description: String,
-    val latitude: Double,
-    val longitude: Double,
     val updatedAt: Instant
 )
