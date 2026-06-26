@@ -43,7 +43,7 @@ fun LandmarkImageEntity.toLandmarkImage(): LandmarkImage {
 fun PointOfInterestImageEntity.toPoiImage(): PointOfInterestImage {
     return PointOfInterestImage(
         id = id!!,
-        image_path = image_path,
+        imageUrl = image_path,
         caption = caption,
         poiId = poi.id!!,
         updatedAt = updatedAt!!
