@@ -32,14 +32,12 @@ class PointOfInterestEntity(
     @GeneratedValue(strategy = GenerationType.UUID)
     var id: UUID? = null, // jpa requires the ID field to be nullable because it starts as null before persistence
     @ManyToOne
-    @JoinColumn(name = "landmark_id")
+    @JoinColumn(name = "landmark_id", unique = true, nullable = false)
     val landmark: LandmarkEntity,
     @Column(nullable = false,unique = false)
     var name: String,
     @Column(nullable = false,unique = false, columnDefinition = "Text")
     var description: String,
-    @Column(nullable = false)
-
     @OneToMany(mappedBy = "poi",cascade =[CascadeType.ALL], orphanRemoval = true)
     val images: MutableList<PointOfInterestImageEntity> = mutableListOf(),
     @CreationTimestamp

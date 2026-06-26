@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Index
 import jakarta.persistence.OneToMany
+import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import jakarta.persistence.UniqueConstraint
 import org.hibernate.annotations.CreationTimestamp
@@ -41,9 +42,8 @@ class LandmarkEntity(
     var latitude: Double,
     @Column(nullable = false, unique = false)
     var longitude: Double,
-    @OneToMany(mappedBy = "landmark", cascade =[CascadeType.ALL], orphanRemoval = true)
-    var pois: MutableList<PointOfInterestEntity> = mutableListOf(),
-
+    @OneToOne(mappedBy = "landmark", cascade =[CascadeType.ALL], orphanRemoval = true)
+    var poi: PointOfInterestEntity? = null,
     @OneToMany(mappedBy = "landmark", cascade =[CascadeType.ALL], orphanRemoval = true)
     var images: MutableList<LandmarkImageEntity> = mutableListOf(),
     @CreationTimestamp
