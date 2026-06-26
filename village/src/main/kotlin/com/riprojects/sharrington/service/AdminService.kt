@@ -237,6 +237,26 @@ class AdminService(
         return poiImageId.image_path
     }
 
+    fun getImagesForPoi(
+        poiImageId: UUID
+    ): List<PointOfInterestImage> {
+
+        return pointOfInterestImageRepository
+            .findAllByPoi_Id(poiImageId)
+            .map { image ->
+
+                PointOfInterestImage(
+                    id = image.id!!,
+                    imageUrl = storageService.getPublicUrl(
+                        image.image_path
+                    ),
+                    caption = image.caption,
+                    poiId =image.poi.id!!,
+                    updatedAt = image.updatedAt ?: Instant.now()
+                )
+            }
+    }
+
     @Transactional
     fun deletePoiImage(id: UUID) {
         pointOfInterestImageRepository.deleteById(id)

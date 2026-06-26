@@ -198,6 +198,16 @@ class AdminController(
 //        println(publicUrl)
     }
 
+    @GetMapping("/landmarks/poi/{landmarkId}/images")
+    fun getPoiImages(
+        @PathVariable poiId: UUID
+    ): List<PointOfInterestImageDto> {
+
+        return adminService
+            .getImagesForPoi(poiId)
+            .map { it.toPointOfInterestImageDto() }
+    }
+
     // deletes poi image & image in Supabase bucket, NOT main POI row in table
     @DeleteMapping("/landmarks/poi/{poiImageId}/images")
     fun deletePoiImage(

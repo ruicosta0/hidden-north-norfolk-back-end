@@ -7,7 +7,7 @@ typealias PoiImageId = UUID
 
 data class PointOfInterestImage(
     var id: PoiImageId,
-    var image_path: String,
+    var imageUrl: String,
     var caption: String?,
     var poiId: PoiId,
     val updatedAt: Instant
