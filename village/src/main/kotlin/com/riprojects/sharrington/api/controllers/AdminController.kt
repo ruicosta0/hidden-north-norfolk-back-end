@@ -198,7 +198,7 @@ class AdminController(
 //        println(publicUrl)
     }
 
-    @GetMapping("/landmarks/poi/{landmarkId}/images")
+    @GetMapping("/landmarks/poi/{poiId}/images")
     fun getPoiImages(
         @PathVariable poiId: UUID
     ): List<PointOfInterestImageDto> {

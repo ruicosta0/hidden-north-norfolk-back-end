@@ -238,11 +238,11 @@ class AdminService(
     }
 
     fun getImagesForPoi(
-        poiImageId: UUID
+        poiId: UUID
     ): List<PointOfInterestImage> {
 
         return pointOfInterestImageRepository
-            .findAllByPoi_Id(poiImageId)
+            .findAllByPoi_Id(poiId)
             .map { image ->
 
                 PointOfInterestImage(
