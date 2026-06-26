@@ -84,19 +84,19 @@ class AdminController(
       Point Of Interest
      */
 
-    @PostMapping("/landmarks/recordPoi/{landmarkId}")
-    fun recordPoi(
-        @PathVariable("landmarkId") landmarkId: UUID,
-        @Valid @RequestBody body: RecordPoiRequest
-    ): PointOfInterestDto {
-        println("Record Poi")
-        println("Received $body")
-        return adminService.recordPoi(
-            id = landmarkId,
-            name = body.name,
-            description = body.description,
-        ).toPointOfInterestDto()
-    }
+//    @PostMapping("/landmarks/recordPoi/{landmarkId}")
+//    fun recordPoi(
+//        @PathVariable("landmarkId") landmarkId: UUID,
+//        @Valid @RequestBody body: RecordPoiRequest
+//    ): PointOfInterestDto {
+//        println("Record Poi")
+//        println("Received $body")
+//        return adminService.recordPoi(
+//            id = landmarkId,
+//            name = body.name,
+//            description = body.description,
+//        ).toPointOfInterestDto()
+//    }
 
     @GetMapping("/landmarks/poi/{landmarkId}")
     fun getPointOfInterest(

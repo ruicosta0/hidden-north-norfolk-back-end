@@ -50,9 +50,16 @@ class AdminService(
                 latitude = latitude,
                 longitude = longitude
             )
-        ).toLandmark()
+        )
+        pointOfInterestRepository.saveAndFlush(
+            PointOfInterestEntity(
+                landmark = savedLandmark,
+                name = savedLandmark.name,
+                description = savedLandmark.description
+            )
+        )
 
-        return savedLandmark
+        return savedLandmark.toLandmark()
     }
 
     fun getLandmarkById(
@@ -94,24 +101,25 @@ class AdminService(
         Point Of Interest
      */
 
+        // placeholder poi created in recordLandmark()
 
-    @Transactional
-    fun recordPoi(id: UUID, name: String, description: String): PointOfInterest {
-        val landmark = landmarkRepository.findByIdOrNull(id)?: throw LandmarkNotFoundException("Landmark with $id not found")
-
-        val trimmedName = name.trim()
-        val trimmedDescription = description.trim()
-
-        val savedPointOfInterest = pointOfInterestRepository.saveAndFlush(
-            PointOfInterestEntity(
-                landmark = landmark,
-                name = trimmedName,
-                description = trimmedDescription,
-            )
-        ).toPointOfInterest()
-
-        return savedPointOfInterest
-    }
+//    @Transactional
+//    fun recordPoi(id: UUID, name: String, description: String): PointOfInterest {
+//        val landmark = landmarkRepository.findByIdOrNull(id)?: throw LandmarkNotFoundException("Landmark with $id not found")
+//
+//        val trimmedName = name.trim()
+//        val trimmedDescription = description.trim()
+//
+//        val savedPointOfInterest = pointOfInterestRepository.saveAndFlush(
+//            PointOfInterestEntity(
+//                landmark = landmark,
+//                name = trimmedName,
+//                description = trimmedDescription,
+//            )
+//        ).toPointOfInterest()
+//
+//        return savedPointOfInterest
+//    }
 
     fun getPoiByLandmarkId(
         id: UUID
