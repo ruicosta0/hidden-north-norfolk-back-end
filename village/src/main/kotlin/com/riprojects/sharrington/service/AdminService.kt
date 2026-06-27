@@ -241,37 +241,21 @@ class AdminService(
         poiId: UUID
     ): List<PointOfInterestImage> {
 
-//        return pointOfInterestImageRepository
-//            .findAllByPoi_Id(poiId)
-//            .map { image ->
-//
-//                PointOfInterestImage(
-//                    id = image.id!!,
-//                    imageUrl = storageService.getPublicUrl(
-//                        image.image_path
-//                    ),
-//                    caption = image.caption,
-//                    poiId =image.poi.id!!,
-//                    updatedAt = image.updatedAt ?: Instant.now()
-//                )
-//            }
-        val images = pointOfInterestImageRepository.findAllByPoi_Id(poiId)
+        return pointOfInterestImageRepository
+            .findAllByPoi_Id(poiId)
+            .map { image ->
 
-        println("Found ${images.size} images")
+                PointOfInterestImage(
+                    id = image.id!!,
+                    imageUrl = storageService.getPublicUrl(
+                        image.image_path
+                    ),
+                    caption = image.caption,
+                    poiId =image.poi.id!!,
+                    updatedAt = image.updatedAt ?: Instant.now()
+                )
+            }
 
-        images.forEach {
-            println(it.image_path)
-        }
-
-        return images.map { image ->
-            PointOfInterestImage(
-                id = image.id!!,
-                imageUrl = image.image_path,   // <-- temporarily remove getPublicUrl()
-                caption = image.caption,
-                poiId = image.poi.id!!,
-                updatedAt = image.updatedAt ?: Instant.now()
-            )
-        }
     }
 
     @Transactional
