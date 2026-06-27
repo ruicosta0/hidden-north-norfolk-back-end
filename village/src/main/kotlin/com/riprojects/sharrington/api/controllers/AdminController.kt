@@ -184,19 +184,19 @@ class AdminController(
         return adminService.attachImageToPoi(poiId, imagePath,caption).toPointOfInterestImageDto()
     }
 
-    @GetMapping("/landmarks/poi/{poiImageId}/images")
-    fun getPoiImagePublicUrl(
-        @PathVariable ("poiImageId") poiImageId: UUID
-    ): PoiImageUrlDto {
-        val imagePath = adminService.getPoiImagePath(poiImageId)
-
-        return PoiImageUrlDto(
-            url = storageService.getPublicUrl(imagePath)
-        )
-
-//        val publicUrl = storageService.getPublicUrl(imagePath)
-//        println(publicUrl)
-    }
+//    @GetMapping("/landmarks/poi/{poiImageId}/images")
+//    fun getPoiImagePublicUrl(
+//        @PathVariable ("poiImageId") poiImageId: UUID
+//    ): PoiImageUrlDto {
+//        val imagePath = adminService.getPoiImagePath(poiImageId)
+//
+//        return PoiImageUrlDto(
+//            url = storageService.getPublicUrl(imagePath)
+//        )
+//
+////        val publicUrl = storageService.getPublicUrl(imagePath)
+////        println(publicUrl)
+//    }
 
     @GetMapping("/landmarks/poi/{poiId}/images")
     fun getPoiImages(
