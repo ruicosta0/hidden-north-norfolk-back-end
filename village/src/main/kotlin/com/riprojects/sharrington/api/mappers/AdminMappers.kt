@@ -48,7 +48,7 @@ fun PointOfInterestImage.toPointOfInterestImageDto(): PointOfInterestImageDto {
         id = id.toString(),
         imageUrl = imageUrl,
         caption = caption,
-        poi = poiId.toString(),
+        poiId = poiId.toString(),
         updatedAt = updatedAt
     )
 }

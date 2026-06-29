@@ -7,6 +7,6 @@ data class PointOfInterestImageDto(
     val id: String,
     var imageUrl: String,
     var caption: String?,
-    var poi: String, // join column
+    var poiId: String, // join column
     val updatedAt: Instant, // join column
 )
