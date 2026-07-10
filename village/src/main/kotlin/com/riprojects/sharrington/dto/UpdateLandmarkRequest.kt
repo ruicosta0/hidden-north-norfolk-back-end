@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Size
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class UpdateLandmarkRequest(
-    @field:Size(min = 1, max = 20, message = "Landmark name must be a max of 20 characters")
+    @field:Size(min = 1, max = 40, message = "Landmark name must be a max of 40 characters")
     val name: String? =null,
     @field:NotBlank("Please add a description")
     val description: String? = null,

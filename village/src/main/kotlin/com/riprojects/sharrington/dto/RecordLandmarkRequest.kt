@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Size
 
 data class RecordLandmarkRequest @JsonCreator constructor(
     @JsonProperty("name")
-    @field:Size(min = 1, max = 20, message = "Landmark name must be a max of 20 characters")
+    @field:Size(min = 1, max = 40, message = "Landmark name must be a max of 40 characters")
     val name: String,
     @JsonProperty ("description")
     @field:NotBlank("Please add a description")

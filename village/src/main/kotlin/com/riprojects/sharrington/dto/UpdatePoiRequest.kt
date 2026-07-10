@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Size
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class UpdatePoiRequest(
-    @field:Size(min = 1, max = 40, message = "Point Of Interest name must be a max of 20 characters")
+    @field:Size(min = 1, max = 40, message = "Point Of Interest name must be a max of 40 characters")
     val name: String? =null,
     @field:NotBlank("Please add a description")
     val description: String? = null,
