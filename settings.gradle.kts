@@ -7,7 +7,7 @@ pluginManagement {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "sharrington"
+rootProject.name = "HiddenNorthNorfolkBackend"
 
 include("app")
 include("village")
