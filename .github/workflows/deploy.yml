@@ -1,9 +1,7 @@
-name: Deploy Sharrington Backend
+name: Deploy Hidden North Norfolk Backend
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -26,16 +24,5 @@ jobs:
         run: |
           ./gradlew :app:bootJar
 
-      - name: Deploy JAR to Server
-        run: |
-          JAR_NAME="app-0.0.1-SNAPSHOT.jar"
-          LOCAL_JAR_PATH="app/build/libs/$JAR_NAME"
-          REMOTE_SERVER="admin@159.69.218.169"
-          REMOTE_JAR_DIR="/opt/sharrington"
-
-          rsync -avz -e "ssh" $LOCAL_JAR_PATH $REMOTE_SERVER:$REMOTE_JAR_DIR/$JAR_NAME
-
-          ssh $REMOTE_SERVER << EOF
-            mv $REMOTE_JAR_DIR/$JAR_NAME $REMOTE_JAR_DIR/sharrington.jar
-            sudo systemctl restart sharrington.service
-          EOF
+      # Deployment will be added once the new
+      # Hidden North Norfolk service is configured.
