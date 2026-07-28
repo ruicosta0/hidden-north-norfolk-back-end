@@ -50,5 +50,5 @@ jobs:
             mv "$REMOTE_JAR_DIR/$JAR_NAME" \
                "$REMOTE_JAR_DIR/hidden-north-norfolk.jar"
 
-            sudo systemctl restart hidden-north-norfolk.service
+            sudo -n systemctl restart hidden-north-norfolk.service
           EOF
