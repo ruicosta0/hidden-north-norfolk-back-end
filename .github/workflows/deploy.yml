@@ -1,7 +1,9 @@
 name: Deploy Hidden North Norfolk Backend
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -10,6 +12,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+
+      - name: Make Gradle executable
+        run: chmod +x gradlew
+
+      - name: Build JAR
+        run: ./gradlew :app:bootJar
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -20,9 +35,20 @@ jobs:
         run: |
           ssh-keyscan -H 159.69.218.169 > ~/.ssh/known_hosts
 
-      - name: Build JAR
+      - name: Deploy JAR to Server
         run: |
-          ./gradlew :app:bootJar
+          JAR_NAME="app-0.0.1-SNAPSHOT.jar"
+          LOCAL_JAR_PATH="app/build/libs/$JAR_NAME"
+          REMOTE_SERVER="admin@159.69.218.169"
+          REMOTE_JAR_DIR="/opt/hidden-north-norfolk"
 
-      # Deployment will be added once the new
-      # Hidden North Norfolk service is configured.
+          rsync -avz -e "ssh" \
+            "$LOCAL_JAR_PATH" \
+            "$REMOTE_SERVER:$REMOTE_JAR_DIR/$JAR_NAME"
+
+          ssh "$REMOTE_SERVER" << EOF
+            mv "$REMOTE_JAR_DIR/$JAR_NAME" \
+               "$REMOTE_JAR_DIR/hidden-north-norfolk.jar"
+
+            sudo systemctl restart hidden-north-norfolk.service
+          EOF
