@@ -1,6 +1,6 @@
 spring:
   application:
-    name: sharrington
+    name: hiddennorthnorfolk
 
   datasource:
     url: jdbc:postgresql://db.ksakbapfvzrevpqmygup.supabase.co:5432/postgres

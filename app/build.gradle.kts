@@ -1,12 +1,12 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-    id("sharrington.spring-boot-app")
+    id("hiddennorthnorfolk.spring-boot-app")
 }
 
 group = "com.riprojects"
 version = "0.0.1-SNAPSHOT"
-description = "Sharrington Backend"
+description = "Hidden North Norfolk Backend"
 
 tasks {
     named<BootJar>(name="bootJar") {

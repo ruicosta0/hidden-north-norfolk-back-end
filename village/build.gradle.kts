@@ -1,6 +1,6 @@
 plugins {
     //id("java-library") // this is a library module that provides functionality to other library modules
-    id("sharrington.spring-boot-service")
+    id("hiddennorthnorfolk.spring-boot-service")
     alias(libs.plugins.kotlin.jpa)
 }
 

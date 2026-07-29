@@ -2,8 +2,8 @@
 
 plugins {
     id("org.springframework.boot")
-    id("sharrington.kotlin-common") // this is reference to sharrington.kotlin-common.gradle.kts to apply its logic
-    id("io.spring.dependency-management") // required to be declared again despite being in sharrington.kotlin-common
+    id("hiddennorthnorfolk.kotlin-common") // this is reference to hiddennorthnorfolk.kotlin-common.gradle.kts to apply its logic
+    id("io.spring.dependency-management") // required to be declared again despite being in hiddennorthnorfolk.kotlin-common
 }
 
 dependencies {

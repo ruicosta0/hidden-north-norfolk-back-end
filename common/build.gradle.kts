@@ -2,7 +2,7 @@
 // note that common is not a service module so don't include sharrington.spring-boot-service
 plugins {
     id("java-library") // this is a library module that provides functionality to other library modules
-    id("sharrington.kotlin-common")
+    id("hiddennorthnorfolk.kotlin-common")
     kotlin("plugin.jpa")
 }
 

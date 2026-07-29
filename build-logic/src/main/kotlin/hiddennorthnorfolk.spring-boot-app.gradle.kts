@@ -1,5 +1,5 @@
 plugins {
-    id("sharrington.spring-boot-service")
+    id("hiddennorthnorfolk.spring-boot-service")
     id("org.springframework.boot")
     kotlin("plugin.spring")
 }
