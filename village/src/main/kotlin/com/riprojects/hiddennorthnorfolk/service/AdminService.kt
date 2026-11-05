@@ -4,20 +4,24 @@ import com.riprojects.hiddennorthnorfolk.domain.exception.LandmarkNotFoundExcept
 import com.riprojects.hiddennorthnorfolk.domain.exception.PointOfInterestNotFoundException
 import com.riprojects.hiddennorthnorfolk.domain.model.Landmark
 import com.riprojects.hiddennorthnorfolk.domain.model.LandmarkImage
+import com.riprojects.hiddennorthnorfolk.domain.model.PoiSource
 import com.riprojects.hiddennorthnorfolk.domain.model.PointOfInterest
 import com.riprojects.hiddennorthnorfolk.domain.model.PointOfInterestImage
 import com.riprojects.hiddennorthnorfolk.dto.UpdateLandmarkRequest
 import com.riprojects.hiddennorthnorfolk.dto.UpdatePoiRequest
 import com.riprojects.hiddennorthnorfolk.infra.database.entities.LandmarkEntity
 import com.riprojects.hiddennorthnorfolk.infra.database.entities.LandmarkImageEntity
+import com.riprojects.hiddennorthnorfolk.infra.database.entities.PoiSourceEntity
 import com.riprojects.hiddennorthnorfolk.infra.database.entities.PointOfInterestEntity
 import com.riprojects.hiddennorthnorfolk.infra.database.entities.PointOfInterestImageEntity
 import com.riprojects.hiddennorthnorfolk.infra.database.mappers.toLandmark
 import com.riprojects.hiddennorthnorfolk.infra.database.mappers.toLandmarkImage
 import com.riprojects.hiddennorthnorfolk.infra.database.mappers.toPoiImage
+import com.riprojects.hiddennorthnorfolk.infra.database.mappers.toPoiSource
 import com.riprojects.hiddennorthnorfolk.infra.database.mappers.toPointOfInterest
 import com.riprojects.hiddennorthnorfolk.infra.database.repositories.LandmarkImageRepository
 import com.riprojects.hiddennorthnorfolk.infra.database.repositories.LandmarkRepository
+import com.riprojects.hiddennorthnorfolk.infra.database.repositories.PoiSourceRepository
 import com.riprojects.hiddennorthnorfolk.infra.database.repositories.PointOfInterestImageRepository
 import com.riprojects.hiddennorthnorfolk.infra.database.repositories.PointOfInterestRepository
 import com.riprojects.hiddennorthnorfolk.infra.storage.SupabaseStorageService
@@ -35,6 +39,7 @@ class AdminService(
     private val pointOfInterestRepository: PointOfInterestRepository,
     private val pointOfInterestImageRepository: PointOfInterestImageRepository,
     private val landmarkImageRepository: LandmarkImageRepository,
+    private val poiSourceRepository: PoiSourceRepository,
     private val storageService: SupabaseStorageService
 ) {
 
@@ -129,6 +134,22 @@ class AdminService(
                 ?: throw PointOfInterestNotFoundException("Poi with $id not found")
 
         return pointOfInterest.toPointOfInterest()
+    }
+
+    fun getPoiSources(poiId: UUID): List<PoiSource> {
+        return poiSourceRepository.findByPoiId(poiId)
+            .sortedWith(
+                compareBy<PoiSourceEntity> {
+                    when (it.referenceType) {
+                        "SOURCE" -> 0
+                        "FURTHER_READING" -> 1
+                        else -> 2
+                    }
+                }
+                    .thenBy { it.displayOrder }
+                    .thenBy { it.title }
+            )
+            .map { it.toPoiSource() }
     }
 
     fun getAllPois(): List<PointOfInterest> {
