@@ -7,5 +7,6 @@ data class PointOfInterestDto(
     val landmarkId: String, // ??join column
     val name: String,
     val description: String,
-    val updatedAt: Instant
+    val updatedAt: Instant,
+    val sources: List<PoiSourceDto> = emptyList()
 )

@@ -2,6 +2,7 @@ package com.riprojects.hiddennorthnorfolk.api.controllers
 
 import com.riprojects.hiddennorthnorfolk.api.mappers.toLandmarkDto
 import com.riprojects.hiddennorthnorfolk.api.mappers.toLandmarkImageDto
+import com.riprojects.hiddennorthnorfolk.api.mappers.toPoiSourceDto
 import com.riprojects.hiddennorthnorfolk.api.mappers.toPointOfInterestDto
 import com.riprojects.hiddennorthnorfolk.api.mappers.toPointOfInterestImageDto
 import com.riprojects.hiddennorthnorfolk.dto.LandmarkDto
@@ -96,11 +97,26 @@ class AdminController(
 //        ).toPointOfInterestDto()
 //    }
 
+//    @GetMapping("/landmarks/poi/{landmarkId}")
+//    fun getPointOfInterest(
+//        @PathVariable("landmarkId") landmarkId: UUID
+//    ): PointOfInterestDto {
+//        return adminService.getPoiByLandmarkId(landmarkId).toPointOfInterestDto()
+//    }
+
     @GetMapping("/landmarks/poi/{landmarkId}")
     fun getPointOfInterest(
         @PathVariable("landmarkId") landmarkId: UUID
     ): PointOfInterestDto {
-        return adminService.getPoiByLandmarkId(landmarkId).toPointOfInterestDto()
+
+        val poi = adminService.getPoiByLandmarkId(landmarkId)
+
+        val sources = adminService.getPoiSources(poi.id)
+            .map { it.toPoiSourceDto() }
+
+        return poi.toPointOfInterestDto().copy(
+            sources = sources
+        )
     }
 
     @GetMapping("/landmarks/poi/")

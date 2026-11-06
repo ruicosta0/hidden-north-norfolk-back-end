@@ -2,10 +2,12 @@ package com.riprojects.hiddennorthnorfolk.api.mappers
 
 import com.riprojects.hiddennorthnorfolk.domain.model.Landmark
 import com.riprojects.hiddennorthnorfolk.domain.model.LandmarkImage
+import com.riprojects.hiddennorthnorfolk.domain.model.PoiSource
 import com.riprojects.hiddennorthnorfolk.domain.model.PointOfInterest
 import com.riprojects.hiddennorthnorfolk.domain.model.PointOfInterestImage
 import com.riprojects.hiddennorthnorfolk.dto.LandmarkImageDto
 import com.riprojects.hiddennorthnorfolk.dto.LandmarkDto
+import com.riprojects.hiddennorthnorfolk.dto.PoiSourceDto
 import com.riprojects.hiddennorthnorfolk.dto.PointOfInterestImageDto
 import com.riprojects.hiddennorthnorfolk.dto.PointOfInterestDto
 
@@ -30,6 +32,20 @@ fun PointOfInterest.toPointOfInterestDto(): PointOfInterestDto {
         name = name,
         description = description,
         updatedAt = updatedAt
+    )
+}
+
+fun PoiSource.toPoiSourceDto(): PoiSourceDto {
+    return PoiSourceDto(
+        id = id.toString(),
+        referenceType = referenceType,
+        title = title,
+        author = author,
+        publisher = publisher,
+        publicationYear = publicationYear,
+        url = url,
+        sourceType = sourceType,
+        displayOrder = displayOrder
     )
 }
 
